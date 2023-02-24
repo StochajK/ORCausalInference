@@ -10,7 +10,7 @@ HeartDiseaseOneHot.py
 import pandas as pd
 
 DESIRED_COLS = ["age", "sex", "chest pain type", "resting bp s", "cholesterol", "fasting blood sugar", "target"]
-NUMERIC_COLS = ["age", "resting bp s", "cholesterol", "max heart rate", "oldpeak"]
+NUMERIC_COLS = ["age", "chest pain type", "resting bp s", "cholesterol", "max heart rate", "oldpeak"]
 NUM_BUCKETS = 4
 
 def main():
@@ -24,7 +24,7 @@ def main():
     # "bucketize" necessary columns, perform one hot encoding
     for col in NUMERIC_COLS:
         if col in df_heart.columns:
-            new_cols = pd.get_dummies(pd.qcut(df_heart[col], q=NUM_BUCKETS), prefix = col)
+            new_cols = pd.get_dummies(pd.qcut(df_heart[col], q=NUM_BUCKETS, duplicates = "drop"), prefix = col)
             df_heart[new_cols.columns] = new_cols
             df_heart.drop(col, axis = 1, inplace = True)
             
@@ -33,9 +33,16 @@ def main():
     target_idx = all_cols.index("target")
     all_cols.insert(len(all_cols), all_cols.pop(target_idx))
     df_heart = df_heart[all_cols]
+    
+    # split the data frame based on the target value
+    grouped_df = df_heart.groupby("target")
+    df_no_disease = grouped_df.get_group(0)
+    df_yes_disease = grouped_df.get_group(1)
                
     # write new df to a csv file
     df_heart.to_csv("Binary_HeartData.csv")
+    df_yes_disease.to_csv("Binary_DiseaseTrue.csv")
+    df_no_disease.to_csv("Binary_DiseaseFalse.csv")
     
     
 main()
