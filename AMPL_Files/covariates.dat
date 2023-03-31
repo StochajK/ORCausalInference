@@ -1,6 +1,6 @@
 #Covariates data in AMPL format 
 
-param CC: 	sex	fasting_blood_sugar	age_(27.999,47.0]	age_(47.0,54.0]	age_(54.0,60.0]	age_(60.0, 77.0]	chest pain type_(0.999, 3.0]	chest_pain_type_(3.0, 4.0]	resting_bp_s_(-0.001,120.0]	resting_bp_s_(120.0,130.0]	resting_bp_s_(130.0,140.0]	resting_bp_s_(140.0,200.0]	cholesterol_(-0.001,188.0]	cholesterol_(188.0,229.0]	cholesterol_(229.0,269.75]	cholesterol_(269.75,603.0] :=
+param CC: 	sex	fasting_blood_sugar	age_(27.999,47.0]	age_(47.0,54.0]	age_(54.0,60.0]	age_(60.0, 77.0]	chest pain type_(0.999, 3.0]	chest_pain_type_(3.0, 4.0]	resting_bp_s_(-0.001,120.0]	resting_bp_s_(120.0,130.0]	resting_bp_s_(130.0,140.0]	resting_bp_s_(140.0,200.0]	cholesterol_(-0.001, 229.0]	cholesterol_(229.0, 603.0] :=
 0	0	0	0	1	0	0	1	0	0	0	0	1	1	0
 1	0	0	0	1	0	0	0	1	0	0	1	0	1	0
 2	1	0	0	1	0	0	1	0	0	0	0	1	1	0
@@ -601,7 +601,7 @@ param CC: 	sex	fasting_blood_sugar	age_(27.999,47.0]	age_(47.0,54.0]	age_(54.0,6
 597	1	0	0	0	1	0	0	1	0	1	0	0	1	0
 598	1	0	1	0	0	0	1	0	0	0	1	0	1	0;
 
-param CT: 	sex	fasting_blood_sugar	age_(27.999,47.0]	age_(47.0,54.0]	age_(54.0,60.0]	age_(60.0, 77.0]	chest pain type_(0.999, 3.0]	chest_pain_type_(3.0, 4.0]	resting_bp_s_(-0.001,120.0]	resting_bp_s_(120.0,130.0]	resting_bp_s_(130.0,140.0]	resting_bp_s_(140.0,200.0]	cholesterol_(-0.001,188.0]	cholesterol_(188.0,229.0]	cholesterol_(229.0,269.75]	cholesterol_(269.75,603.0] :=
+param CT: 	sex	fasting_blood_sugar	age_(27.999,47.0]	age_(47.0,54.0]	age_(54.0,60.0]	age_(60.0, 77.0]	chest pain type_(0.999, 3.0]	chest_pain_type_(3.0, 4.0]	resting_bp_s_(-0.001,120.0]	resting_bp_s_(120.0,130.0]	resting_bp_s_(130.0,140.0]	resting_bp_s_(140.0,200.0] cholesterol_(-0.001, 229.0]	cholesterol_(229.0, 603.0] :=
 0	1	0	1	0	0	0	1	0	0	0	1	0	0	1
 1	1	0	1	0	0	0	1	0	0	1	0	0	0	1
 2	1	0	1	0	0	0	1	0	1	0	0	0	0	1
