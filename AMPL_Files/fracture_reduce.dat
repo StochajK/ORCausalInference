@@ -1,7 +1,7 @@
 #Other data (total # of treatment and control units, covariates set and total # of discordant pairs (n)) in AMPL format
 
-param T2:=599;
-param T1:=591;
+param T2:=598;
+param T1:=590;
 
 set C1:=  age	sex	chest_pain_type;
 
