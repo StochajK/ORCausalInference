@@ -1,0 +1,73 @@
+reset;
+
+option omit_zero_rows 1;
+option display_eps .001;
+option solution_round 3;
+option solver gurobi;
+
+model fracture_reduce.mod;
+data fracture_reduce.dat;
+data covariates_reduce.dat;
+data outcome_reduce.dat;
+
+problem MAX1: a, b, c, B, C, obj1,defb100, defb101, defc100, defc101, sum1, sum11, sum2, sum22, max_pair, avoid_repeat2, avoid_repeat1, pair_cons ; 
+problem MIN1:  a, b, c, B, C, obj2,defb100, defb101, defc100, defc101, sum1, sum11, sum2, sum22, max_pair, avoid_repeat2, avoid_repeat1, pair_cons ; 
+
+for{1..5}{
+	for {i in 1..T1, j in 1..T2}
+		{
+			if (CT[i,"age"] - CC[j,"age"])^2 <= 25 then 
+
+				{let  NA[i,j]:=0;}
+			else
+				{let  NA[i,j]:=1;}
+		}
+	
+	for {i in 1..T1, j in 1..T2}
+		{
+			if (CT[i,"sex"] == CC[j,"sex"]) then 
+
+				{let  NS[i,j]:=0;}
+			else
+				{let  NS[i,j]:=1;}
+		}
+		
+	for {i in 1..T1, j in 1..T2}
+		{
+			if (CT[i,"chest_pain_type"] == CC[j,"chest_pain_type"]) then 
+
+				{let  NCP[i,j]:=0;}
+			else
+				{let  NCP[i,j]:=1;}
+		}
+
+}
+	
+let {i in 1..T1, j in 1..T2}DD[i,j]:=NA[i,j]+NS[i,j]+NCP[i,j];
+
+
+	for {i in 1..T1, j in 1..T2}
+		{
+			if DD[i,j]=0 then 
+				{let  D[i,j]:=1;}
+			else
+				{let  D[i,j]:=0;}
+		}
+
+		problem MAX1; 
+		option solver gurobi; 
+		#option cplex_options mipgap=0.001;
+		solve MAX1;
+
+			printf"\n %10.3f \", n >>glow_max.txt;
+			printf"\ %10.3f \", (B-C-1)/sqrt(n)>> glow_max.txt;
+
+		problem MIN1;  
+		option solver gurobi; 
+		#option cplex_options mipgap=0.001;
+		solve MIN1;
+
+			printf"\n %10.3f \", n >>glow_min.txt;
+			printf"\ %10.3f \", (B-C-1)/sqrt(n)>> glow_min.txt;
+let n:=n+1;
+}

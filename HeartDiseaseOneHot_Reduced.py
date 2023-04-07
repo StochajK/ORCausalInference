@@ -9,7 +9,7 @@ HeartDiseaseOneHot.py
 # import necessary libraries and initialize constants
 import pandas as pd
 
-DESIRED_COLS = ["age", "sex", "chest pain type", "resting bp s", "cholesterol", "fasting blood sugar", "target"]
+DESIRED_COLS = ["age", "sex", "chest pain type", "cholesterol", "target"]
 NUMERIC_COLS = ["age", "chest pain type", "resting bp s", "cholesterol", "max heart rate", "oldpeak"]
 NUM_BUCKETS = 4
 TREATMENT = "cholesterol"
@@ -46,12 +46,14 @@ def main():
     # "bucketize" necessary columns, perform one hot encoding
     # all cols are split into NUM_BUCKETS buckets except treatment (always two buckets)
     for col in NUMERIC_COLS:
+        '''
         if col in df_heart.columns and col != TREATMENT:
             new_cols = pd.get_dummies(pd.qcut(df_heart[col], q=NUM_BUCKETS, duplicates = "drop"), prefix = col)
             df_heart[new_cols.columns] = new_cols
             df_heart.drop(col, axis = 1, inplace = True)
+        '''
             
-        elif col == TREATMENT:
+        if col == TREATMENT:
             new_cols = pd.get_dummies(pd.qcut(df_heart[col], q=2, duplicates = "drop"), prefix = col)
             df_heart[new_cols.columns] = new_cols
             df_heart.drop(col, axis = 1, inplace = True)
@@ -93,7 +95,11 @@ def main():
     df_control.columns = updated_col_lst
     df_treatment.columns = updated_col_lst
     
-    print(df_control.columns)
+    print(df_control.columns[3:])
+    
+
+    df_control.drop(df_control.columns[3:], axis = 1, inplace = True)
+    df_treatment.drop(df_treatment.columns[3:], axis = 1, inplace = True)
     
     # write necessary DataFrames to csv files
     df_heart.to_csv("Binary_HeartData.csv")
@@ -102,7 +108,8 @@ def main():
     df_treatment.to_csv(f"TreatmentData{FN_AUGMENT}.txt", sep = "\t")
     
     df_control_results.to_csv(f"ControlResults{FN_AUGMENT}.txt", sep = "\t")
-    df_treatment_results.to_csv("TreatmentResults{FN_AUGMENT}.txt", sep = "\t")
+    df_treatment_results.to_csv(f"TreatmentResults{FN_AUGMENT}.txt", sep = "\t")
+
     
     
 main()
