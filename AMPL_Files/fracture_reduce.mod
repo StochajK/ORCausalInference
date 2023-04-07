@@ -17,6 +17,8 @@ param NA {i in 1..T1, j in 1..T2};
 param NS {i in 1..T1, j in 1..T2};
 param NCP {i in 1..T1, j in 1..T2};
 
+param DD {i in 1..T1, j in 1..T2};
+
 param CT {i in 1..T1, k in C1};
 #parameters for treatment covariates
 param CC {j in 1..T2, k in C1};

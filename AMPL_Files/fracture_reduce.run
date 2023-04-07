@@ -70,4 +70,3 @@ let {i in 1..T1, j in 1..T2}DD[i,j]:=NA[i,j]+NS[i,j]+NCP[i,j];
 			printf"\n %10.3f \", n >>glow_min.txt;
 			printf"\ %10.3f \", (B-C-1)/sqrt(n)>> glow_min.txt;
 let n:=n+1;
-}
