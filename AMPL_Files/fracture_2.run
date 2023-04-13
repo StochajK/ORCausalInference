@@ -5,10 +5,10 @@ option display_eps .001;
 option solution_round 3;
 option solver gurobi;
 
-model fracture_reduce.mod;
-data fracture_reduce.dat;
-data covariates_reduce.dat;
-data outcome_reduce.dat;
+model fracture_2.mod;
+data fracture_2.dat;
+data covariates_2.dat;
+data outcome_2.dat;
 
 problem MAX1: a, b, c, B, C, obj1,defb100, defb101, defc100, defc101, sum1, sum11, sum2, sum22, max_pair, avoid_repeat2, avoid_repeat1, pair_cons ; 
 problem MIN1:  a, b, c, B, C, obj2,defb100, defb101, defc100, defc101, sum1, sum11, sum2, sum22, max_pair, avoid_repeat2, avoid_repeat1, pair_cons ; 
@@ -16,7 +16,7 @@ problem MIN1:  a, b, c, B, C, obj2,defb100, defb101, defc100, defc101, sum1, sum
 for{1..5}{
 	for {i in 1..T1, j in 1..T2}
 		{
-			if (CT[i,"age"] - CC[j,"age"])^2 <= 16 then 
+			if (CT[i,"age"] == CC[j,"age"]) then 
 
 				{let  NA[i,j]:=0;}
 			else
@@ -40,10 +40,19 @@ for{1..5}{
 			else
 				{let  NCP[i,j]:=1;}
 		}
+		
+	for {i in 1..T1, j in 1..T2}
+		{
+			if (CT[i,"resting_bp_s"] - CC[j,"resting_bp_s"])^2 <= 1 then 
+
+				{let  NBP[i,j]:=0;}
+			else
+				{let  NBP[i,j]:=1;}
+		}
 
 }
 	
-let {i in 1..T1, j in 1..T2}DD[i,j]:=NA[i,j]+NS[i,j]+NCP[i,j];
+let {i in 1..T1, j in 1..T2}DD[i,j]:=NA[i,j]+NS[i,j]+NCP[i,j]+NBP[i,j];
 
 
 	for {i in 1..T1, j in 1..T2}

@@ -8,11 +8,12 @@ HeartDiseaseOneHot.py
 
 # import necessary libraries and initialize constants
 import pandas as pd
+import numpy as np
 
-DESIRED_COLS = ["age", "sex", "chest pain type", "cholesterol", "target"]
+DESIRED_COLS = ["age", "sex", "chest pain type", "resting bp s","cholesterol", "target"]
 NUMERIC_COLS = ["age", "chest pain type", "resting bp s", "cholesterol", "max heart rate", "oldpeak"]
 NUM_BUCKETS = 4
-TREATMENT = "cholesterol"
+TREATMENT = "resting bp s"
 CHAR_LST = ["(", ")", "[", "]", ","]
 # identifies the treatment, 0 for the low bucket, 1 for the high bucket
 HIGH_LOW = 1
@@ -95,11 +96,16 @@ def main():
     df_control.columns = updated_col_lst
     df_treatment.columns = updated_col_lst
     
-    print(df_control.columns[3:])
+    print(df_control.columns[4:])
     
 
-    df_control.drop(df_control.columns[3:], axis = 1, inplace = True)
-    df_treatment.drop(df_treatment.columns[3:], axis = 1, inplace = True)
+    df_control.drop(df_control.columns[4:], axis = 1, inplace = True)
+    df_treatment.drop(df_treatment.columns[4:], axis = 1, inplace = True)
+    
+    my_df = [df_control, df_control_results, df_treatment, df_treatment_results]
+    
+    for df in my_df:
+        df.index = np.arange(1, len(df) + 1)
     
     # write necessary DataFrames to csv files
     df_heart.to_csv("Binary_HeartData.csv")

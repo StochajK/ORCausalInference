@@ -1,0 +1,8 @@
+#Other data (total # of treatment and control units, covariates set and total # of discordant pairs (n)) in AMPL format
+
+param T2:=648;
+param T1:=542;
+
+set C1:=  age	sex	chest_pain_type	cholesterol;
+
+#param n:=30;
