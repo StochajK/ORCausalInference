@@ -12,7 +12,7 @@ import pandas as pd
 DESIRED_COLS = ["age", "sex", "chest pain type", "resting bp s", "cholesterol", "fasting blood sugar", "target"]
 NUMERIC_COLS = ["age", "chest pain type", "resting bp s", "cholesterol", "max heart rate", "oldpeak"]
 NUM_BUCKETS = 4
-TREATMENT = "cholesterol"
+TREATMENT = "resting bp s"
 CHAR_LST = ["(", ")", "[", "]", ","]
 # identifies the treatment, 0 for the low bucket, 1 for the high bucket
 HIGH_LOW = 1
@@ -102,7 +102,7 @@ def main():
     df_treatment.to_csv(f"TreatmentData{FN_AUGMENT}.txt", sep = "\t")
     
     df_control_results.to_csv(f"ControlResults{FN_AUGMENT}.txt", sep = "\t")
-    df_treatment_results.to_csv("TreatmentResults{FN_AUGMENT}.txt", sep = "\t")
+    df_treatment_results.to_csv(f"TreatmentResults{FN_AUGMENT}.txt", sep = "\t")
     
     
 main()

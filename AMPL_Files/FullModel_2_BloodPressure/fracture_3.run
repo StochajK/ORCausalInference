@@ -5,15 +5,15 @@ option display_eps .001;
 option solution_round 3;
 option solver gurobi;
 
-model fracture_2.mod;
-data fracture_2.dat;
-data covariates_2.dat;
-data outcome_2.dat;
+model fracture_3.mod;
+data fracture_3.dat;
+data covariates_3.dat;
+data outcome_3.dat;
 
 problem MAX1: a, b, c, B, C, obj1,defb100, defb101, defc100, defc101, sum1, sum11, sum2, sum22, max_pair, avoid_repeat2, avoid_repeat1, pair_cons ; 
 problem MIN1:  a, b, c, B, C, obj2,defb100, defb101, defc100, defc101, sum1, sum11, sum2, sum22, max_pair, avoid_repeat2, avoid_repeat1, pair_cons ; 
 
-for{1..5}{
+for{1..10}{
 	for {i in 1..T1, j in 1..T2}
 		{
 			if (CT[i,"age"] == CC[j,"age"]) then 
@@ -43,16 +43,15 @@ for{1..5}{
 		
 	for {i in 1..T1, j in 1..T2}
 		{
-			if (CT[i,"resting_bp_s"] - CC[j,"resting_bp_s"])^2 <= 1 then 
+			if (CT[i,"cholesterol"] - CC[j,"cholesterol"])^2 <= 25 then 
 
-				{let  NBP[i,j]:=0;}
+				{let  NCH[i,j]:=0;}
 			else
-				{let  NBP[i,j]:=1;}
+				{let  NCH[i,j]:=1;}
 		}
-
-}
 	
-let {i in 1..T1, j in 1..T2}DD[i,j]:=NA[i,j]+NS[i,j]+NCP[i,j]+NBP[i,j];
+	
+let {i in 1..T1, j in 1..T2}DD[i,j]:=NA[i,j]+NS[i,j]+NCP[i,j]+NCH[i,j];
 
 
 	for {i in 1..T1, j in 1..T2}
@@ -68,14 +67,16 @@ let {i in 1..T1, j in 1..T2}DD[i,j]:=NA[i,j]+NS[i,j]+NCP[i,j]+NBP[i,j];
 		#option cplex_options mipgap=0.001;
 		solve MAX1;
 
-			printf"\n %10.3f \", n >>results_max.txt;
-			printf"\ %10.3f \", (B-C-1)/sqrt(n)>> results_max.txt;
+			printf"\n %10.3f \", n >>results_max3.txt;
+			printf"\ %10.3f \", (B-C-1)/sqrt(n)>> results_max3.txt;
 
 		problem MIN1;  
 		option solver gurobi; 
 		#option cplex_options mipgap=0.001;
 		solve MIN1;
 
-			printf"\n %10.3f \", n >>results_min.txt;
-			printf"\ %10.3f \", (B-C-1)/sqrt(n)>> results_min.txt;
+			printf"\n %10.3f \", n >>results_min3.txt;
+			printf"\ %10.3f \", (B-C-1)/sqrt(n)>> results_min3.txt;
 let n:=n+1;
+}	
+		

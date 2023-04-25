@@ -1,7 +1,7 @@
 set C1;
 # set of all covariates
 
-param n default 30;
+param n default 25;
 #total number of discordant pairs
 
 param T1;
@@ -16,6 +16,7 @@ param D{i in 1..T1, j in 1..T2};
 param NA {i in 1..T1, j in 1..T2};
 param NS {i in 1..T1, j in 1..T2};
 param NCP {i in 1..T1, j in 1..T2};
+param NBP {i in 1..T1, j in 1..T2};
 
 param DD {i in 1..T1, j in 1..T2};
 

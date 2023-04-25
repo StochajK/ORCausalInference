@@ -1,0 +1,16 @@
+
+     25.000      -2.000 
+     26.000      -1.765 
+     27.000      -1.540 
+     28.000      -1.323 
+     29.000      -1.114 
+     30.000      -0.913 
+     31.000      Infeasible/Unbounded 
+     32.000      Infeasible/Unbounded 
+     33.000      Infeasible/Unbounded
+     34.000      Infeasible/Unbounded
+     30.000      Infeasible/Unbounded
+     31.000      Infeasible/Unbounded
+     32.000      Infeasible/Unbounded
+     33.000      Infeasible/Unbounded
+     34.000      Infeasible/Unbounded
