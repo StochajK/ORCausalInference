@@ -5,10 +5,10 @@ This is a data manipulation/file conversion python script that aims to make proj
 The intended purpose of this script is to convert a simple .csv of data into .dat files that can be read by AMPL.  
 
 ## Necessary Software and Libraries
-To run, this code requires that you have a python interperter, and 3 libraries downloaded:
-[Pandas](https://pandas.pydata.org/docs/getting_started/install.html)
-[Numpy](https://numpy.org/install/)
-[PySimpleGUI](https://pypi.org/project/PySimpleGUI/) 
+To run, this code requires that you have a python interperter, and 3 libraries downloaded:  
+[Pandas](https://pandas.pydata.org/docs/getting_started/install.html)  
+[Numpy](https://numpy.org/install/)  
+[PySimpleGUI](https://pypi.org/project/PySimpleGUI/)   
 
 ## Instructions
 To use this code, make sure that the .csv file that you would like to convert (two such .csvs have been provided in this repository) is stored in the same file as the provided python file, dat_converter.py.
