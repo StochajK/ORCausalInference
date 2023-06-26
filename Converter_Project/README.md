@@ -1,7 +1,7 @@
 # Converter Project
 
 ## Introduction
-This is a data manipulation/file conversion python script that aims to make projects that follow (more information [here](LINK)) more accessable to new data sets.
+This is a data manipulation/file conversion python script that aims to make projects that follow (more information [here](https://github.com/marcomorucci/robust-tests/tree/master)) more accessable to new data sets.
 The intended purpose of this script is to convert a simple .csv of data into .dat files that can be read by AMPL.  
 
 ## Necessary Software and Libraries
